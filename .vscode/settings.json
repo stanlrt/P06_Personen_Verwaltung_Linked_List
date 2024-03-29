@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "command.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "command-handlers.h": "c",
+        "stdbool.h": "c"
     }
 }
