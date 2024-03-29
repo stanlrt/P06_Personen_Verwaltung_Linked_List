@@ -84,17 +84,15 @@ static Command* get_command_by_keyword(Command* commandList,
 
 Command* prompt_user_for_valid_command(Command* commandList,
                                        size_t commandCount) {
-  size_t keywordStringLength =
+  size_t longest_keyword_length =
       get_length_of_longest_keyword(commandList, commandCount) + 1;
-  static char* commandKeywordInputByUser = NULL;
-  if (commandKeywordInputByUser == NULL) {
-    commandKeywordInputByUser =
-        (char*)malloc(keywordStringLength * sizeof(char));
-  }
+  char* commandKeywordInputByUser =
+      (char*)malloc(longest_keyword_length * sizeof(char));
   print_commands(commandList, commandCount);
   print_prompt();
   while (true) {
-    if (fgets(commandKeywordInputByUser, keywordStringLength, stdin) != NULL) {
+    if (fgets(commandKeywordInputByUser, longest_keyword_length, stdin) !=
+        NULL) {
       clean_input(commandKeywordInputByUser);
       if (is_valid_keyword(commandKeywordInputByUser, commandList,
                            commandCount)) {
@@ -102,6 +100,7 @@ Command* prompt_user_for_valid_command(Command* commandList,
         return get_command_by_keyword(commandList, commandCount,
                                       commandKeywordInputByUser);
       } else {
+        printf("DEBUG invalid kw: %s\n", commandKeywordInputByUser);
         printf("Invalid command. Try again.\n\n");
         print_commands(commandList, commandCount);
         print_prompt();

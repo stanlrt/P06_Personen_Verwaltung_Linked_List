@@ -46,7 +46,11 @@ Person* prompt_user_for_person(void) {
   clean_input(person->name);
 
   printf("Age: ");
-  scanf("%d", &person->age);
+  while (scanf("%d", &person->age) != 1) {
+    printf("Please enter a number.\nAge: ");
+    clear_input_buffer();
+  }
+  clear_input_buffer();
   return person;
 }
 
