@@ -1,0 +1,5 @@
+- //TODO Fix bug instr no arg, then instr arg -> crash
+- //TODO Fix double enter
+- //TODO Sanitise age input integer
+- //TODO Check for mem leaks
+- //TODO Directory structure

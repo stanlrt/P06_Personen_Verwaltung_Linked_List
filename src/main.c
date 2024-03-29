@@ -20,21 +20,15 @@
 #include "command.h"
 #include "person.h"
 
-#define INSERT_COMMAND "I"
-#define REMOVE_COMMAND "R"
-#define SHOW_COMMAND "S"
-#define CLEAR_COMMAND "C"
-#define END_COMMAND "E"
-
 /**
  * The list of commands that the user can enter
  */
 Command commandList[] = {
-    {INSERT_COMMAND, execute_insert_command, true, "Insert a person"},
-    {REMOVE_COMMAND, execute_remove_command, true, "Remove a person"},
-    {SHOW_COMMAND, execute_show_command, false, "Show all people"},
-    {CLEAR_COMMAND, execute_clear_command, false, "Clear the list of people"},
-    {END_COMMAND, execute_end_command, false, "End the program"},
+    {"Insert", execute_insert_command, true, "Insert a person"},
+    {"Remove", execute_remove_command, true, "Remove a person"},
+    {"Show", execute_show_command, false, "Show all people"},
+    {"C", execute_clear_command, false, "Clear the list of people"},
+    {"E", execute_end_command, false, "End the program"},
 };
 
 const size_t commandCount = sizeof(commandList) / sizeof(Command);
@@ -58,7 +52,8 @@ void printBufferContentsForDebugging() {
  */
 int main(int argc, char* argv[]) {
   // BEGIN-STUDENTS-TO-ADD-CODE
-  printf("Welcome.\n");
+  printf(
+      "Welcome. This program allows you to manipulate a record of people.\n\n");
   while (true) {
     execute_command(prompt_user_for_valid_command(commandList, commandCount),
                     commandList, commandCount, (void*)prompt_user_for_person);

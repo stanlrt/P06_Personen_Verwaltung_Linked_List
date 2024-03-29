@@ -6,9 +6,6 @@
  * This file contains the implementation of the command parsing logic. This
  * logic is responsible for prompting the user for a command, parsing the
  * command, and executing the command.
- *
- * The list of commands that the user can enter are defined in the `commands`
- * array.
  */
 
 #include "command.h"
@@ -27,6 +24,8 @@ void print_commands(Command* commandList, size_t commandCount) {
   }
   printf("\n");
 }
+
+static void print_prompt() { printf(">>> "); }
 
 /**
  * Returns the length of the longest keyword in the given list of commands.
@@ -92,17 +91,20 @@ Command* prompt_user_for_valid_command(Command* commandList,
     commandKeywordInputByUser =
         (char*)malloc(keywordStringLength * sizeof(char));
   }
-
   print_commands(commandList, commandCount);
+  print_prompt();
   while (true) {
     if (fgets(commandKeywordInputByUser, keywordStringLength, stdin) != NULL) {
       clean_input(commandKeywordInputByUser);
       if (is_valid_keyword(commandKeywordInputByUser, commandList,
                            commandCount)) {
+        printf("\n");
         return get_command_by_keyword(commandList, commandCount,
                                       commandKeywordInputByUser);
       } else {
-        printf("Invalid command. Try again.\n");
+        printf("Invalid command. Try again.\n\n");
+        print_commands(commandList, commandCount);
+        print_prompt();
       }
     }
   }

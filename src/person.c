@@ -35,6 +35,7 @@ void free_person(Person* person) { free(person); }
 
 Person* prompt_user_for_person(void) {
   Person* person = malloc(sizeof(Person));
+  printf("Specify the person's details.\n");
 
   printf("First name: ");
   fgets(person->firstName, NAME_LEN, stdin);
