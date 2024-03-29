@@ -1,0 +1,26 @@
+# ninja log v5
+60	566	7333299405567958	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command_handlers.c.obj	f82adf6dffdd0e97
+92	536	7333299405221277	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/input.c.obj	8af83c24481659da
+150	597	7333299406094750	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/person.c.obj	cdadc0cb0f28ad12
+186	596	7333299405911071	CMakeFiles/tests.dir/tests/test.c.obj	551aade34084710b
+91	832	7333301102954643	tests.exe	4310ffcfa596c738
+45	102	0	clean	9c4b4372737ab8da
+7	396	7334128155745307	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+7	250	7334129321280424	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command_handlers.c.obj	f82adf6dffdd0e97
+9	298	7334129756955472	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+7	219	7334129976523873	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/main.c.obj	3e90d9a7ce16c905
+220	870	7334129983117375	P06_Personen_Verwaltung_Linked_List.exe	9723722a713b9207
+8	221	7334130713315456	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/main.c.obj	3e90d9a7ce16c905
+222	715	7334130718291440	P06_Personen_Verwaltung_Linked_List.exe	9723722a713b9207
+7	289	7334131336076116	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+7	296	7334143204031035	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+6	241	7334144072819893	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+82	1294	7334144361038418	P06_Personen_Verwaltung_Linked_List.exe	9723722a713b9207
+48	416	7334148332300002	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command_handlers.c.obj	f82adf6dffdd0e97
+8	289	7334149897226645	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command/command.c.obj	e18e5be470ec8ae2
+38	313	7334149897226645	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/command_handlers.c.obj	f82adf6dffdd0e97
+62	346	7334149897811031	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/main.c.obj	3e90d9a7ce16c905
+86	360	7334149898141785	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/person.c.obj	cdadc0cb0f28ad12
+361	956	7334149904061682	P06_Personen_Verwaltung_Linked_List.exe	9723722a713b9207
+41	380	7334151159929306	CMakeFiles/P06_Personen_Verwaltung_Linked_List.dir/src/person.c.obj	cdadc0cb0f28ad12
+381	909	7334151165377389	P06_Personen_Verwaltung_Linked_List.exe	9723722a713b9207
