@@ -1,0 +1,5 @@
+- check void args
+- do argument checks accoridng to README
+- fix sorting
+- extract input logic to input module
+- trim whitespace

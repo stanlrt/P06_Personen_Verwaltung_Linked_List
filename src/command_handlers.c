@@ -12,30 +12,56 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
+#include "linked_list.h"
 #include "person.h"
+
+LinkedList* globalPersonList = NULL;
+
+static void initialiseList() {
+  if (globalPersonList == NULL) {
+    globalPersonList = createLinkedList();
+  }
+}
 
 bool execute_insert_command(void* person_to_insert) {
   Person* person = (Person*)person_to_insert;
-  printf("INSERTTTTT");
+  initialiseList();
+  sortedInsert(globalPersonList, person, person_compare);
 }
 
 bool execute_remove_command(void* person_to_remove) {
   Person* person = (Person*)person_to_remove;
-  printf("REMOVE");
+  for (size_t i = 0; i < globalPersonList->size; i++) {
+    Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
+    if (strcmp(currentPerson->lastName, person->lastName) == 0 &&
+        strcmp(currentPerson->firstName, person->firstName) == 0 &&
+        currentPerson->age == person->age) {
+      deleteAtIndex(globalPersonList, i);
+      return true;
+    }
+  }
+  return false;
 }
 
 bool execute_show_command(void* person_to_show) {
   Person* person = (Person*)person_to_show;
-  printf("SHOW");
+  for (size_t i = 0; i < globalPersonList->size; i++) {
+    Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
+    printf("%i \t %s \n", i, person_to_string(currentPerson));
+  }
+  return true;
 }
 
 bool execute_clear_command(void* person_to_clear) {
   Person* person = (Person*)person_to_clear;
-  printf("CLEAR");
+  deleteList(globalPersonList);
+  return true;
 }
 
 bool execute_end_command(void* person_to_end) {
-  Person* person = (Person*)person_to_end;
-  printf("END");
+  printf("Thanks for using the program!");
+  exit(0);
 }

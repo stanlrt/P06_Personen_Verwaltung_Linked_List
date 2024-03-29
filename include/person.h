@@ -4,13 +4,13 @@
 #define NAME_LEN 20
 
 /**
- * A person with a name, first name, and age.
+ * A person with a lastName, first lastName, and age.
  */
 typedef struct {
   /**
    * The person's last name.
    */
-  char name[NAME_LEN];
+  char lastName[NAME_LEN];
   /**
    * The person's first name.
    */
@@ -22,7 +22,7 @@ typedef struct {
 } Person;
 
 /**
- * @brief  Compares two persons in this sequence: 1st=name, 2nd=firstName,
+ * @brief  Compares two persons in this sequence: 1st=lastName, 2nd=firstName,
  * 3rd=age
  * @param  personA [IN] const reference to 1st person in the comparison
  * @param  personB [IN] const reference to 2nd person in the comparison
@@ -35,7 +35,7 @@ typedef struct {
  * @remark personA->age – personB->age is used for producing the result of age
  * comparison
  */
-int person_compare(const Person* personA, const Person* personB);
+int person_compare(const void* personA, const void* personB);
 
 /**
  * @brief  Frees the memory allocated for the person.

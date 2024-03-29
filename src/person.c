@@ -12,20 +12,22 @@
 
 #include "input.h"
 
-int person_compare(const Person* personA, const Person* personB) {
-  if (strcmp(personA->name, personB->name) > 0)
+int person_compare(const void* personA, const void* personB) {
+  Person* a = (Person*)personA;
+  Person* b = (Person*)personB;
+  if (strcmp(a->lastName, b->lastName) > 0)
     return 1;
-  else if (strcmp(personA->name, personB->name) < 0)
+  else if (strcmp(a->lastName, b->lastName) < 0)
     return -1;
 
-  if (strcmp(personA->name, personB->name) > 0)
+  if (strcmp(a->firstName, b->firstName) > 0)
     return 2;
-  else if (strcmp(personA->name, personB->name) < 0)
+  else if (strcmp(a->firstName, b->firstName) < 0)
     return -2;
 
-  if (personA->age - personB->age > 0)
+  if (a->age - b->age > 0)
     return 3;
-  else if (personA->age - personB->age < 0)
+  else if (a->age - b->age < 0)
     return -3;
 
   return 0;
@@ -42,8 +44,8 @@ Person* prompt_user_for_person(void) {
   clean_input(person->firstName);
 
   printf("Last name: ");
-  fgets(person->name, NAME_LEN, stdin);
-  clean_input(person->name);
+  fgets(person->lastName, NAME_LEN, stdin);
+  clean_input(person->lastName);
 
   printf("Age: ");
   while (scanf("%d", &person->age) != 1) {
@@ -55,14 +57,15 @@ Person* prompt_user_for_person(void) {
 }
 
 char* person_to_string(const Person* person) {
-  int requiredSize = snprintf(NULL, 0, "First name: %s, Last name: %s, Age: %d",
-                              person->firstName, person->name, person->age) +
-                     1;
+  int requiredSize =
+      snprintf(NULL, 0, "First name: %s, Last name: %s, Age: %d",
+               person->firstName, person->lastName, person->age) +
+      1;
 
   char* string = malloc(requiredSize);
   if (string != NULL) {
-    sprintf(string, "First name: %s, Last name: %s, Age: %d", person->firstName,
-            person->name, person->age);
+    sprintf(string, "First name: %s \t Last name: %s \t Age: %d",
+            person->firstName, person->lastName, person->age);
   }
   return string;
 }

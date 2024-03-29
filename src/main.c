@@ -24,9 +24,9 @@
  * The list of commands that the user can enter
  */
 Command commandList[] = {
-    {"Insert", execute_insert_command, true, "Insert a person"},
-    {"Remove", execute_remove_command, true, "Remove a person"},
-    {"Show", execute_show_command, false, "Show all people"},
+    {"I", execute_insert_command, true, "Insert a person"},
+    {"R", execute_remove_command, true, "Remove a person"},
+    {"S", execute_show_command, false, "Show all people"},
     {"C", execute_clear_command, false, "Clear the list of people"},
     {"E", execute_end_command, false, "End the program"},
 };
