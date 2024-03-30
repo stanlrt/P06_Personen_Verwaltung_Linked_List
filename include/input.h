@@ -6,25 +6,24 @@
 #include <string.h>
 
 /**
- * Clears the input buffer
+ * @brief Reads an integer from the user, and stores it in the provided buffer.
+ *
+ * @param userInput The integer to read into
+ * @param prompt The prompt to display to the user
  */
-void clear_input_buffer(void);
+void read_integer(int* userInput, char* prompt);
 
 /**
- * Trims the new line character from the end of a string, in place.
+ * @brief Reads a string of maximum length from the user, and stores it in the
+ * provided buffer.
  *
- * @param string The string to trim
- * @return `true` if the string was trimmed, `false` otherwise
+ * @param userInput The string to read into
+ * @param prompt The prompt to display to the user
+ * @param maximumLength The maximum length of the string, including the null
+ * terminator
+ * @note The length should include the null terminator.
  */
-bool trimNewLineCharacter(char *string);
-
-/**
- * Cleans the input by trimming the new line character and clearing the input
- * buffer.
- *
- * @param input The input to clean
- * @return The cleaned input
- */
-void clean_input(char *input);
+void read_string_of_maximum_length(char* userInput, char* prompt,
+                                   int maximumLength);
 
 #endif

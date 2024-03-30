@@ -33,16 +33,6 @@ Command commandList[] = {
 
 const size_t commandCount = sizeof(commandList) / sizeof(Command);
 
-// TODO Delete
-void printBufferContentsForDebugging() {
-  int c;
-  printf("Buffer contents: ");
-  while ((c = getchar()) != EOF && c != '\n') {
-    printf("%c", c);
-  }
-  printf("\n");
-}
-
 /**
  * @brief Main entry point.
  * @param[in] argc  The size of the argv array.

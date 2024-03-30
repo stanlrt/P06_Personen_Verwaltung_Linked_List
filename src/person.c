@@ -38,21 +38,9 @@ void free_person(Person* person) { free(person); }
 Person* prompt_user_for_person(void) {
   Person* person = malloc(sizeof(Person));
   printf("Specify the person's details.\n");
-
-  printf("First name: ");
-  fgets(person->firstName, NAME_LEN, stdin);
-  clean_input(person->firstName);
-
-  printf("Last name: ");
-  fgets(person->lastName, NAME_LEN, stdin);
-  clean_input(person->lastName);
-
-  printf("Age: ");
-  while (scanf("%d", &person->age) != 1) {
-    printf("Please enter a number.\nAge: ");
-    clear_input_buffer();
-  }
-  clear_input_buffer();
+  read_string_of_maximum_length(person->firstName, "First name: ", NAME_LEN);
+  read_string_of_maximum_length(person->lastName, "Last name: ", NAME_LEN);
+  read_integer(&person->age, "Age: ");
   return person;
 }
 
@@ -61,7 +49,6 @@ char* person_to_string(const Person* person) {
       snprintf(NULL, 0, "First name: %s, Last name: %s, Age: %d",
                person->firstName, person->lastName, person->age) +
       1;
-
   char* string = malloc(requiredSize);
   if (string != NULL) {
     sprintf(string, "First name: %s \t Last name: %s \t Age: %d",

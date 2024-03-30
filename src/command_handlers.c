@@ -48,6 +48,10 @@ bool execute_remove_command(void* person_to_remove) {
 
 bool execute_show_command(void* person_to_show) {
   Person* person = (Person*)person_to_show;
+  if (globalPersonList->size == 0) {
+    printf("The list is empty.\n");
+    return true;
+  }
   for (size_t i = 0; i < globalPersonList->size; i++) {
     Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
     printf("%i \t %s \n", i, person_to_string(currentPerson));

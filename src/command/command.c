@@ -22,17 +22,15 @@ void print_commands(Command* commandList, size_t commandCount) {
     printf("Enter [%s] to %s\n", commandList[i].keyword,
            commandList[i].description);
   }
-  printf("\n");
 }
 
-static void print_prompt() { printf(">>> "); }
-
 /**
- * Returns the length of the longest keyword in the given list of commands.
- *
+ * @brief Returns the length of the longest keyword in the given list of
+ * commands, including the null terminator.
  * @param commandList The list of commands.
  * @param commandCount The number of commands in the list.
- * @return The length of the longest keyword in the list of commands.
+ * @return The length of the longest keyword in the list of commands, including
+ * the null terminator.
  */
 static size_t get_length_of_longest_keyword(Command* commandList,
                                             size_t commandCount) {
@@ -43,7 +41,7 @@ static size_t get_length_of_longest_keyword(Command* commandList,
       maxLength = length;
     }
   }
-  return maxLength;
+  return maxLength + 1;
 }
 
 /**
@@ -84,27 +82,20 @@ static Command* get_command_by_keyword(Command* commandList,
 
 Command* prompt_user_for_valid_command(Command* commandList,
                                        size_t commandCount) {
-  size_t longest_keyword_length =
-      get_length_of_longest_keyword(commandList, commandCount) + 1;
-  char* commandKeywordInputByUser =
-      (char*)malloc(longest_keyword_length * sizeof(char));
+  size_t longestKeywordLengthIncludingNullTerminator =
+      get_length_of_longest_keyword(commandList, commandCount);
+  char* commandKeywordInputByUser = (char*)malloc(
+      (longestKeywordLengthIncludingNullTerminator) * sizeof(char));
   print_commands(commandList, commandCount);
-  print_prompt();
   while (true) {
-    if (fgets(commandKeywordInputByUser, longest_keyword_length, stdin) !=
-        NULL) {
-      clean_input(commandKeywordInputByUser);
-      if (is_valid_keyword(commandKeywordInputByUser, commandList,
-                           commandCount)) {
-        printf("\n");
-        return get_command_by_keyword(commandList, commandCount,
-                                      commandKeywordInputByUser);
-      } else {
-        printf("DEBUG invalid kw: %s\n", commandKeywordInputByUser);
-        printf("Invalid command. Try again.\n\n");
-        print_commands(commandList, commandCount);
-        print_prompt();
-      }
+    read_string_of_maximum_length(commandKeywordInputByUser, "",
+                                  longestKeywordLengthIncludingNullTerminator);
+    if (is_valid_keyword(commandKeywordInputByUser, commandList,
+                         commandCount)) {
+      return get_command_by_keyword(commandList, commandCount,
+                                    commandKeywordInputByUser);
+    } else {
+      printf("Unrecognised command.\n");
     }
   }
 }
