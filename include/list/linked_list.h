@@ -40,18 +40,20 @@ Node* getNodeAtIndex(LinkedList* list, int index);
  * @param list The list to insert into
  * @param data The data to insert
  * @param allowDuplicates Whether to allow duplicates
+ * @return The node that was inserted
  */
-void insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
-                   int (*ComparisonFunction)(const void*, const void*));
+Node* insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
+                    int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data at the end of the list
  * @param list The list to insert into
  * @param data The data to insert
  * @param allowDuplicates Whether to allow duplicates
+ * @return The node that was inserted
  */
-void insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
-                 int (*ComparisonFunction)(const void*, const void*));
+Node* insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
+                  int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data at a specific index in the list
@@ -59,12 +61,13 @@ void insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
  * @param data The data to insert
  * @param index The index to insert at.
  * @param allowDuplicates Whether to allow duplicates
+ * @return The node that was inserted
  * @note If the index is larger than the size of
  * the list, the data will be inserted at the end of the list.
  */
-void insertAtIndex(LinkedList* list, void* data, int index,
-                   bool allowDuplicates,
-                   int (*ComparisonFunction)(const void*, const void*));
+Node* insertAtIndex(LinkedList* list, void* data, int index,
+                    bool allowDuplicates,
+                    int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data into the list in a sorted manner
@@ -72,11 +75,21 @@ void insertAtIndex(LinkedList* list, void* data, int index,
  * @param data The data to insert
  * @param Comparator The comparator function to use
  * @param allowDuplicates Whether to allow duplicates
+ * @return The node that was inserted
  * @note The list must be sorted before this function is called. You can use the
  * `sort` function.
  */
-void sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
-                  int (*ComparisonFunction)(const void*, const void*));
+Node* sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
+                   int (*ComparisonFunction)(const void*, const void*));
+
+/**
+ * @brief Delete all instances of a specific data element from the list
+ * @param list The list to delete from
+ * @param data The data to delete
+ * @param ComparisonFunction The comparison function to use
+ */
+bool deleteNode(LinkedList* list, void* data,
+                int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Delete the data at the start of the list

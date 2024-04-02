@@ -35,9 +35,9 @@ static void* getNodeAtIndexGeneric(void* dataStructure, size_t index) {
   return getNodeAtIndex(list, index);
 }
 
-void insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
-                   int (*ComparisonFunction)(const void*, const void*)) {
-  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return;
+Node* insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
+                    int (*ComparisonFunction)(const void*, const void*)) {
+  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
   Node* node = createNewNode(data);
   if (list->size == 0) {
     list->tail = node;
@@ -48,9 +48,9 @@ void insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
   list->size++;
 }
 
-void insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
-                 int (*ComparisonFunction)(const void*, const void*)) {
-  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return;
+Node* insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
+                  int (*ComparisonFunction)(const void*, const void*)) {
+  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
   Node* node = createNewNode(data);
   if (list->size == 0) {
     list->head = node;
@@ -62,18 +62,18 @@ void insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
   list->size++;
 }
 
-void insertAtIndex(LinkedList* list, void* data, int index,
-                   bool allowDuplicates,
-                   int (*ComparisonFunction)(const void*, const void*)) {
-  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return;
-  if (index < 0) return;
+Node* insertAtIndex(LinkedList* list, void* data, int index,
+                    bool allowDuplicates,
+                    int (*ComparisonFunction)(const void*, const void*)) {
+  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
+  if (index < 0) return NULL;
   if (index == 0) {
     insertAtStart(list, data, allowDuplicates, ComparisonFunction);
-    return;
+    return list->head;
   }
   if (index >= list->size) {
     insertAtEnd(list, data, allowDuplicates, ComparisonFunction);
-    return;
+    return list->tail;
   }
   Node* node = createNewNode(data);
   Node* currentNodeAtIndex = getNodeAtIndex(list, index - 1);
@@ -82,20 +82,20 @@ void insertAtIndex(LinkedList* list, void* data, int index,
   list->size++;
 }
 
-void sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
-                  int (*ComparisonFunction)(const void*, const void*)) {
-  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return;
+Node* sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
+                   int (*ComparisonFunction)(const void*, const void*)) {
+  if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
   if (list->size == 0) {
     insertAtStart(list, data, allowDuplicates, ComparisonFunction);
-    return;
+    return list->head;
   }
   if (ComparisonFunction(data, list->head->data) <= 0) {
     insertAtStart(list, data, allowDuplicates, ComparisonFunction);
-    return;
+    return list->head;
   }
   if (ComparisonFunction(data, list->tail->data) > 0) {
     insertAtEnd(list, data, allowDuplicates, ComparisonFunction);
-    return;
+    return list->tail;
   }
 
   Node* current = list->head;
@@ -107,6 +107,19 @@ void sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
   newNode->next = current->next;
   current->next = newNode;
   list->size++;
+}
+
+bool deleteNode(LinkedList* list, void* data,
+                int (*ComparisonFunction)(const void*, const void*)) {
+  if (list->size == 0) return false;
+  bool matchFound = false;
+  for (size_t i = 0; i < list->size; i++) {
+    if (ComparisonFunction(data, getNodeAtIndex(list, i)->data) == 0) {
+      matchFound = true;
+      deleteAtIndex(list, i);
+    }
+  }
+  return matchFound;
 }
 
 void deleteAtStart(LinkedList* list) {

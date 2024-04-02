@@ -1,4 +1,3 @@
 - fix quicksort: either pass a convertToArray function and use array QS, or fix current impl
 - write tests
-- check void args
 - trim whitespace around keywords

@@ -18,6 +18,8 @@
 #include "linked_list.h"
 #include "person.h"
 
+#define USE_QUICK_SORT false
+
 LinkedList* globalPersonList = NULL;
 
 /**
@@ -32,29 +34,37 @@ static void initialiseList(void) {
 bool execute_insert_command(void* personToInsert) {
   Person* person = (Person*)personToInsert;
   initialiseList();
-  if (contains(globalPersonList, person, person_compare)) {
-    printf("Duplicate person not inserted.\n");
-    return false;
+  if (USE_QUICK_SORT) {
+    if (insertAtEnd(globalPersonList, person, false, person_compare)) {
+      sort(globalPersonList, person_compare);
+      printf("Person inserted.\n");
+      return true;
+    } else {
+      printf("Duplicate person not inserted.\n");
+      return false;
+    }
+  } else {
+    if (sortedInsert(globalPersonList, person, false, person_compare)) {
+      printf("Person inserted.\n");
+      return true;
+    } else {
+      printf("Duplicate person not inserted.\n");
+      return false;
+    }
   }
-  insertAtEnd(globalPersonList, person, false, person_compare);
-  sort(globalPersonList, person_compare);
-  // sortedInsert(globalPersonList, person, person_compare);
   return true;
 }
 
 bool execute_remove_command(void* personToRemove) {
   Person* person = (Person*)personToRemove;
   initialiseList();
-  for (size_t i = 0; i < globalPersonList->size; i++) {
-    Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
-    if (strcmp(currentPerson->lastName, person->lastName) == 0 &&
-        strcmp(currentPerson->firstName, person->firstName) == 0 &&
-        currentPerson->age == person->age) {
-      deleteAtIndex(globalPersonList, i);
-      return true;
-    }
+  if (deleteNode(globalPersonList, person, person_compare)) {
+    printf("Person removed.\n");
+    return true;
+  } else {
+    printf("Person not found.\n");
+    return false;
   }
-  return false;
 }
 
 bool execute_show_command(void* personToShow) {
@@ -75,6 +85,7 @@ bool execute_clear_command(void* personToClear) {
   Person* person = (Person*)personToClear;
   initialiseList();
   deleteList(globalPersonList);
+  printf("List cleared.\n");
   return true;
 }
 

@@ -1,15 +1,15 @@
-// #include <assert.h>
-// #include <stdio.h>
+#include <assert.h>
+#include <stdio.h>
 
-// // tests
-// static void test_person_compare(void) {
-//   // BEGIN-STUDENTS-TO-ADD-CODE
-//   // arrange: create Person objs
+// tests
+static void test_person_compare(void) {
+  // BEGIN-STUDENTS-TO-ADD-CODE
+  // arrange: create Person objs
 
-//   // act:
-//   assert(1 == 2);
+  // act:
+  assert(1 == 2);
 
-//   // assert compare results of compare
+  // assert compare results of compare
 
-//   // END-STUDENTS-TO-ADD-CODE
-// }
+  // END-STUDENTS-TO-ADD-CODE
+}
