@@ -47,7 +47,6 @@ int main(int argc, char* argv[]) {
   while (true) {
     execute_command(prompt_user_for_valid_command(commandList, commandCount),
                     commandList, commandCount, (void*)prompt_user_for_person);
-    // printBufferContentsForDebugging();
     printf("\n\n");
   }
 

@@ -1,5 +1,4 @@
+- fix quicksort: either pass a convertToArray function and use array QS, or fix current impl
+- write tests
 - check void args
-- do argument checks accoridng to README
-- fix sorting
-- extract input logic to input module
-- trim whitespace
+- trim whitespace around keywords

@@ -1,10 +1,12 @@
 #include "node.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 Node* createNewNode(void* data) {
   Node* node = (Node*)malloc(sizeof(Node));
   if (node == NULL) {
+    fprintf(stderr, "Failed to allocate memory for a new node.\n");
     return NULL;
   }
   if (data != NULL) {

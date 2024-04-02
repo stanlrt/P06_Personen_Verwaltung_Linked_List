@@ -86,6 +86,13 @@ Command* prompt_user_for_valid_command(Command* commandList,
       get_length_of_longest_keyword(commandList, commandCount);
   char* commandKeywordInputByUser = (char*)malloc(
       (longestKeywordLengthIncludingNullTerminator) * sizeof(char));
+  if (commandKeywordInputByUser == NULL) {
+    fprintf(stderr,
+            "Failed to allocate memory for the command keyword input by "
+            "the user.\n");
+    return NULL;
+  }
+
   print_commands(commandList, commandCount);
   while (true) {
     read_string_of_maximum_length(commandKeywordInputByUser, "",

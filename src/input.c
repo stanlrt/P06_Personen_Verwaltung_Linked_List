@@ -62,7 +62,7 @@ void read_string_of_maximum_length(char* userInput, char* prompt,
              maximumLengthIncludingNullTerminator - 1);
     }
   } while (!isValidInput);
-  strcpy(userInput, tempUserInput);
+  strncpy(userInput, tempUserInput, maximumLengthIncludingNullTerminator);
 }
 
 // TODO remove

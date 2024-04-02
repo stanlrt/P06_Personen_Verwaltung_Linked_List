@@ -3,6 +3,10 @@
         "command.h": "c",
         "stdlib.h": "c",
         "command-handlers.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "linked_list.h": "c",
+        "stdio.h": "c",
+        "node.h": "c",
+        "person_test.h": "c"
     }
 }

@@ -20,20 +20,31 @@
 
 LinkedList* globalPersonList = NULL;
 
+/**
+ * @brief Initialises the globalPersonList if it does not exist.
+ */
 static void initialiseList() {
   if (globalPersonList == NULL) {
-    globalPersonList = createLinkedList();
+    globalPersonList = createNewLinkedList();
   }
 }
 
-bool execute_insert_command(void* person_to_insert) {
-  Person* person = (Person*)person_to_insert;
+bool execute_insert_command(void* personToInsert) {
+  Person* person = (Person*)personToInsert;
   initialiseList();
-  sortedInsert(globalPersonList, person, person_compare);
+  if (contains(globalPersonList, person, person_compare)) {
+    printf("Duplicate person not inserted.\n");
+    return false;
+  }
+  insertAtEnd(globalPersonList, person, false, person_compare);
+  sort(globalPersonList, person_compare);
+  // sortedInsert(globalPersonList, person, person_compare);
+  return true;
 }
 
-bool execute_remove_command(void* person_to_remove) {
-  Person* person = (Person*)person_to_remove;
+bool execute_remove_command(void* personToRemove) {
+  Person* person = (Person*)personToRemove;
+  initialiseList();
   for (size_t i = 0; i < globalPersonList->size; i++) {
     Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
     if (strcmp(currentPerson->lastName, person->lastName) == 0 &&
@@ -46,8 +57,9 @@ bool execute_remove_command(void* person_to_remove) {
   return false;
 }
 
-bool execute_show_command(void* person_to_show) {
-  Person* person = (Person*)person_to_show;
+bool execute_show_command(void* personToShow) {
+  Person* person = (Person*)personToShow;
+  initialiseList();
   if (globalPersonList->size == 0) {
     printf("The list is empty.\n");
     return true;
@@ -59,13 +71,14 @@ bool execute_show_command(void* person_to_show) {
   return true;
 }
 
-bool execute_clear_command(void* person_to_clear) {
-  Person* person = (Person*)person_to_clear;
+bool execute_clear_command(void* personToClear) {
+  Person* person = (Person*)personToClear;
+  initialiseList();
   deleteList(globalPersonList);
   return true;
 }
 
-bool execute_end_command(void* person_to_end) {
+bool execute_end_command(void* personToEnd) {
   printf("Thanks for using the program!");
   exit(0);
 }

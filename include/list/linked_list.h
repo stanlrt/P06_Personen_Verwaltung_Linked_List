@@ -1,6 +1,8 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <stdbool.h>
+
 #include "node.h"
 
 typedef struct LinkedList {
@@ -21,7 +23,7 @@ typedef int (*Comparator)(const void*, const void*);
 /**
  * @brief Create a new list object
  */
-LinkedList* createLinkedList(void);
+LinkedList* createNewLinkedList(void);
 
 /**
  * @brief Get the node at a specific index in the list
@@ -37,36 +39,44 @@ Node* getNodeAtIndex(LinkedList* list, int index);
  * @brief Insert data at the start of the list
  * @param list The list to insert into
  * @param data The data to insert
+ * @param allowDuplicates Whether to allow duplicates
  */
-void insertAtStart(LinkedList* list, void* data);
+void insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
+                   int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data at the end of the list
  * @param list The list to insert into
  * @param data The data to insert
+ * @param allowDuplicates Whether to allow duplicates
  */
-void insertAtEnd(LinkedList* list, void* data);
+void insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
+                 int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data at a specific index in the list
  * @param list The list to insert into
  * @param data The data to insert
  * @param index The index to insert at.
+ * @param allowDuplicates Whether to allow duplicates
  * @note If the index is larger than the size of
  * the list, the data will be inserted at the end of the list.
  */
-void insertAtIndex(LinkedList* list, void* data, int index);
+void insertAtIndex(LinkedList* list, void* data, int index,
+                   bool allowDuplicates,
+                   int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Insert data into the list in a sorted manner
  * @param list The list to insert into
  * @param data The data to insert
  * @param Comparator The comparator function to use
+ * @param allowDuplicates Whether to allow duplicates
  * @note The list must be sorted before this function is called. You can use the
  * `sort` function.
  */
-void sortedInsert(LinkedList* list, void* data,
-                  int (*Comparator)(const void*, const void*));
+void sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
+                  int (*ComparisonFunction)(const void*, const void*));
 
 /**
  * @brief Delete the data at the start of the list
@@ -99,7 +109,7 @@ void deleteList(LinkedList* list);
  * @param index1 The first index to swap
  * @param index2 The second index to swap
  */
-void swap(LinkedList* list, int index1, int index2);
+void swapNodesAtIndex(LinkedList* list, int index1, int index2);
 
 /**
  * @brief Sort the list using a comparator function
@@ -107,5 +117,15 @@ void swap(LinkedList* list, int index1, int index2);
  * @param Comparator The comparator function to use
  */
 void sort(LinkedList* list, int (*Comparator)(const void*, const void*));
+
+/**
+ * @brief Check if the list contains a specific data element
+ * @param list The list to check
+ * @param data The data to check for
+ * @param Comparator The comparator function to use
+ * @return `true` if the list contains the data, `false` otherwise
+ */
+bool contains(LinkedList* list, void* data,
+              int (*Comparator)(const void*, const void*));
 
 #endif  // LINKED_LIST_H

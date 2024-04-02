@@ -28,8 +28,9 @@ typedef struct {
  * @param  personB [IN] const reference to 2nd person in the comparison
  * @return =0 if all record fields are the same
  *         >0 if all previous fields are the same, but for this field, personA
- * is greater <0 if all previous fields are the same, but for this field,
- * personB is greater
+ *         is greater (e.g. "Smith" > "John")
+ *         <0 if all previous fields are the same, but for this field, personB
+ *         is greater (e.g. "John" > "Smith")
  * @remark strncmp() is used for producing the result of string field
  * comparisons
  * @remark personA->age – personB->age is used for producing the result of age
