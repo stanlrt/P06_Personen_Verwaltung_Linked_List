@@ -18,7 +18,7 @@
 #include "linked_list.h"
 #include "person.h"
 
-#define USE_QUICK_SORT false
+#define FEATURE_FLAG_USE_QUICK_SORT false
 
 LinkedList* globalPersonList = NULL;
 
@@ -34,7 +34,7 @@ static void initialiseList(void) {
 bool execute_insert_command(void* personToInsert) {
   Person* person = (Person*)personToInsert;
   initialiseList();
-  if (USE_QUICK_SORT) {
+  if (FEATURE_FLAG_USE_QUICK_SORT) {
     if (insertAtEnd(globalPersonList, person, false, person_compare)) {
       sort(globalPersonList, person_compare);
       printf("Person inserted.\n");
