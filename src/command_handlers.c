@@ -23,7 +23,7 @@ LinkedList* globalPersonList = NULL;
 /**
  * @brief Initialises the globalPersonList if it does not exist.
  */
-static void initialiseList() {
+static void initialiseList(void) {
   if (globalPersonList == NULL) {
     globalPersonList = createNewLinkedList();
   }
