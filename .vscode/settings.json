@@ -7,6 +7,7 @@
         "linked_list.h": "c",
         "stdio.h": "c",
         "node.h": "c",
-        "person_test.h": "c"
+        "person_test.h": "c",
+        "person.h": "c"
     }
 }
