@@ -47,15 +47,6 @@ typedef struct {
 } Command;
 
 /**
- * Helper function that prints the keyword and description for each command in
- * the given list.
- *
- * @param commandList The list of commands.
- * @param commandCount The number of commands in the list.
- */
-void print_commands(Command* commandList, size_t commandCount);
-
-/**
  * Prompts the user for a command contained in the given list, by displaying the
  * list of possible keywords.
  *

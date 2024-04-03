@@ -17,7 +17,14 @@
 #include "input.h"
 #include "person.h"
 
-void print_commands(Command* commandList, size_t commandCount) {
+/**
+ * Helper function that prints the keyword and description for each command in
+ * the given list.
+ *
+ * @param commandList The list of commands.
+ * @param commandCount The number of commands in the list.
+ */
+static void print_commands(Command* commandList, size_t commandCount) {
   for (int i = 0; i < commandCount; ++i) {
     printf("Enter [%s] to %s\n", commandList[i].keyword,
            commandList[i].description);
