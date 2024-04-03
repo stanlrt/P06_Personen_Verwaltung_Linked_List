@@ -49,7 +49,6 @@ int main(int argc, char* argv[]) {
                     commandList, commandCount, (void*)prompt_user_for_person);
     printf("\n\n");
   }
-
   // END-STUDENTS-TO-ADD-CODE
   return EXIT_SUCCESS;
 }
