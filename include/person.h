@@ -18,7 +18,7 @@ typedef struct {
   /**
    * The person's age.
    */
-  unsigned int age;
+  int age;
 } Person;
 
 /**

@@ -29,7 +29,6 @@ int person_compare(const void* personA, const void* personB) {
 
   if (a->age > b->age) {
     return 3;
-    // } else if (a->age - b->age < 0) {  DOES NOT WORK
   } else if (a->age < b->age) {
     return -3;
   }
