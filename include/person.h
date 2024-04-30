@@ -21,6 +21,13 @@ typedef struct {
   int age;
 } Person;
 
+typedef enum PrintMode { TEXT, CSV } PrintMode;
+
+/**
+ * @brief Creates a new person
+ */
+Person* create_person(char* lastName, char* firstName, int age);
+
 /**
  * @brief  Compares two persons in this sequence: 1st=lastName, 2nd=firstName,
  * 3rd=age
@@ -56,6 +63,14 @@ Person* prompt_user_for_person(void);
  * @param  person [IN] const reference to the person
  * @return a string representation of the person
  */
-char* person_to_string(const Person* person);
+char* person_to_string(const Person* person, PrintMode mode);
+
+/**
+ * @brief  Parses a person from a string.
+ * @param  string [IN] const reference to the string
+ * @param  mode [IN] the mode to parse the person in
+ * @return the person object created based on the string
+ */
+Person* parse_person_from_string(const char* string, PrintMode mode);
 
 #endif  // PERSON_H

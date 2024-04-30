@@ -27,7 +27,7 @@ LinkedList* globalPersonList = NULL;
  */
 static void initialiseList(void) {
   if (globalPersonList == NULL) {
-    globalPersonList = createNewLinkedList();
+    globalPersonList = create_linked_list();
   }
 }
 
@@ -76,7 +76,7 @@ bool execute_show_command(void* personToShow) {
   }
   for (size_t i = 0; i < globalPersonList->size; i++) {
     Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
-    printf("%i \t %s \n", i, person_to_string(currentPerson));
+    printf("%i \t %s \n", i, person_to_string(currentPerson, TEXT));
   }
   return true;
 }

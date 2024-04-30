@@ -19,11 +19,11 @@ static int clear_input_buffer(void) {
   return charInBufferCount;
 }
 
-void read_integer(int* userInput, char* prompt) {
+void read_integer(int* inputDestination, char* prompt) {
   bool isValidInput = false;
   do {
     printf("%s\n%s", prompt, INPUT_READY_SYMBOL);
-    if (scanf("%d", userInput) == 1) {
+    if (scanf("%d", inputDestination) == 1) {
       isValidInput = true;
     } else {
       printf("Invalid input. Please enter an integer.\n");
@@ -32,7 +32,7 @@ void read_integer(int* userInput, char* prompt) {
   } while (!isValidInput);
 }
 
-void read_string_of_maximum_length(char* userInput, char* prompt,
+void read_string_of_maximum_length(char* inputDestination, char* prompt,
                                    int maximumLengthIncludingNullTerminator) {
   if (maximumLengthIncludingNullTerminator <= 1) return;
   char tempUserInput[maximumLengthIncludingNullTerminator];
@@ -62,7 +62,8 @@ void read_string_of_maximum_length(char* userInput, char* prompt,
              maximumLengthIncludingNullTerminator - 1);
     }
   } while (!isValidInput);
-  strncpy(userInput, tempUserInput, maximumLengthIncludingNullTerminator);
+  strncpy(inputDestination, tempUserInput,
+          maximumLengthIncludingNullTerminator);
 }
 
 // TODO remove

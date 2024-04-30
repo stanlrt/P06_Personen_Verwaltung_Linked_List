@@ -7,7 +7,7 @@
 
 #include "sorting.h"
 
-LinkedList* createNewLinkedList(void) {
+LinkedList* create_linked_list(void) {
   LinkedList* list = (LinkedList*)malloc(sizeof(LinkedList));
   if (list == NULL) {
     fprintf(stderr, "Failed to allocate memory for a new linked list.\n");
@@ -38,7 +38,7 @@ static void* getNodeAtIndexGeneric(void* dataStructure, size_t index) {
 Node* insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
                     int (*ComparisonFunction)(const void*, const void*)) {
   if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
-  Node* node = createNewNode(data);
+  Node* node = create_node(data);
   if (list->size == 0) {
     list->tail = node;
   } else {
@@ -51,7 +51,7 @@ Node* insertAtStart(LinkedList* list, void* data, bool allowDuplicates,
 Node* insertAtEnd(LinkedList* list, void* data, bool allowDuplicates,
                   int (*ComparisonFunction)(const void*, const void*)) {
   if (!allowDuplicates && contains(list, data, ComparisonFunction)) return NULL;
-  Node* node = createNewNode(data);
+  Node* node = create_node(data);
   if (list->size == 0) {
     list->head = node;
     list->tail = node;
@@ -75,7 +75,7 @@ Node* insertAtIndex(LinkedList* list, void* data, int index,
     insertAtEnd(list, data, allowDuplicates, ComparisonFunction);
     return list->tail;
   }
-  Node* node = createNewNode(data);
+  Node* node = create_node(data);
   Node* currentNodeAtIndex = getNodeAtIndex(list, index - 1);
   node->next = currentNodeAtIndex->next;
   currentNodeAtIndex->next = node;
@@ -103,7 +103,7 @@ Node* sortedInsert(LinkedList* list, void* data, bool allowDuplicates,
          ComparisonFunction(data, current->next->data) > 0) {
     current = current->next;
   }
-  Node* newNode = createNewNode(data);
+  Node* newNode = create_node(data);
   newNode->next = current->next;
   current->next = newNode;
   list->size++;

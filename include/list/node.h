@@ -12,6 +12,6 @@ typedef struct Node {
  * @param next [OPTIONAL] The next node in the list
  * @return The new node
  */
-Node* createNewNode(void* data);
+Node* create_node(void* data);
 
 #endif  // NODE_H
