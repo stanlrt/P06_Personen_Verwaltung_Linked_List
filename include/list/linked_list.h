@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+#include "file-printing.h"
 #include "node.h"
 
 typedef struct LinkedList {
@@ -144,5 +145,29 @@ void sort(LinkedList* list, int (*Comparator)(const void*, const void*));
  */
 bool contains(LinkedList* list, void* data,
               int (*Comparator)(const void*, const void*));
+
+/**
+ * @brief Save the list to a file
+ * @param list The list to save
+ * @param filename The filename to save to
+ * @param format The format to save in
+ * @param nodeDataToString The function to convert the node data to a string
+ */
+void save_list_to_file(LinkedList* list, const char* filename,
+                       FileFormat format,
+                       char* nodeDataToString(const void*, FileFormat));
+
+/**
+ * @brief Load the list from a file
+ * @param list The list to load into
+ * @param filename The filename to load from
+ * @param format The format to load in
+ * @param parseNodeData The function to convert the node data from a string
+ */
+void load_list_from_file(LinkedList* list, const char* filename,
+                         FileFormat format,
+                         void* parseNodeData(const char*, FileFormat),
+                         int (*ComparisonFunction)(const void*, const void*),
+                         int nodeDataAttributesCount);
 
 #endif  // LINKED_LIST_H

@@ -10,5 +10,7 @@ bool execute_remove_command(void* personToRemove);
 bool execute_show_command(void* personToShow);
 bool execute_clear_command(void* personToClear);
 bool execute_end_command(void* personToEnd);
+bool execute_store_command(void);
+bool execute_load_command(void);
 
 #endif  // COMMAND_HANDLERS_H

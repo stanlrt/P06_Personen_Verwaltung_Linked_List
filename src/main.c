@@ -30,6 +30,8 @@ Command commandList[] = {
     {"S", execute_show_command, false, "Show all people"},
     {"C", execute_clear_command, false, "Clear the list of people"},
     {"E", execute_end_command, false, "End the program"},
+    {"St", execute_store_command, false, "Store the list of people"},
+    {"Ld", execute_load_command, false, "Load the list of people"},
 };
 
 const size_t commandCount = sizeof(commandList) / sizeof(Command);
@@ -43,24 +45,25 @@ const size_t commandCount = sizeof(commandList) / sizeof(Command);
  */
 int main(int argc, char* argv[]) {
   // BEGIN-STUDENTS-TO-ADD-CODE
-  // printf(
-  //     "Welcome. This program allows you to manipulate a record of
-  //     people.\n\n");
-  // while (true) {
-  //   execute_command(prompt_user_for_valid_command(commandList, commandCount),
-  //                   commandList, commandCount,
-  //                   (void*)prompt_user_for_person);
-  //   printf("\n\n");
-  // }
-  LinkedList* list = create_linked_list();
-  PrintMode printMode = TEXT;
-  Person* person = create_person("John", "Doe", 20);
-  char* string = person_to_string(person, printMode);
-  printf(string);
-  printf("\n");
-  Person* john = parse_person_from_string(string, printMode);
-  // insertAtEnd(list, john, false, person_compare);
-  printf(person_to_string(john, printMode));
+
+  printf(
+      "Welcome. This program allows you to manipulate a record of people.\n\n");
+  while (true) {
+    execute_command(prompt_user_for_valid_command(commandList, commandCount),
+                    commandList, commandCount, (void*)prompt_user_for_person);
+    printf("\n\n");
+  }
+
+  // LinkedList* list = create_linked_list();
+  // FileFormat printMode = CSV;
+  // Person* person = create_person("John", "Doe", 20);
+  // char* string = person_to_string(person, printMode);
+  // printf(string);
+  // printf("\n");
+  // Person* john = parse_person_from_string(string, printMode);
+  // // insertAtEnd(list, john, false, person_compare);
+  // printf(person_to_string(john, printMode));
+
   // END-STUDENTS-TO-ADD-CODE
   return EXIT_SUCCESS;
 }

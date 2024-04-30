@@ -1,3 +1,4 @@
+#include "file-printing.h"
 #ifndef PERSON_H
 #define PERSON_H
 
@@ -20,8 +21,6 @@ typedef struct {
    */
   int age;
 } Person;
-
-typedef enum PrintMode { TEXT, CSV } PrintMode;
 
 /**
  * @brief Creates a new person
@@ -63,7 +62,7 @@ Person* prompt_user_for_person(void);
  * @param  person [IN] const reference to the person
  * @return a string representation of the person
  */
-char* person_to_string(const Person* person, PrintMode mode);
+char* person_to_string(const Person* person, FileFormat mode);
 
 /**
  * @brief  Parses a person from a string.
@@ -71,6 +70,6 @@ char* person_to_string(const Person* person, PrintMode mode);
  * @param  mode [IN] the mode to parse the person in
  * @return the person object created based on the string
  */
-Person* parse_person_from_string(const char* string, PrintMode mode);
+Person* parse_person_from_string(const char* string, FileFormat mode);
 
 #endif  // PERSON_H

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "file-printing.h"
 #include "input.h"
 
 Person* create_person(char* lastName, char* firstName, int age) {
@@ -52,8 +53,8 @@ void free_person(Person* person) { free(person); }
 
 Person* prompt_user_for_person(void) {
   printf("Specify the person's details.\n");
-  char* firstName;
-  char* lastName;
+  char* firstName[NAME_LEN];
+  char* lastName[NAME_LEN];
   int age;
   read_string_of_maximum_length(firstName, "First name: ", NAME_LEN);
   read_string_of_maximum_length(lastName, "Last name: ", NAME_LEN);
@@ -62,12 +63,12 @@ Person* prompt_user_for_person(void) {
   return person;
 }
 
-char* person_to_string(const Person* person, PrintMode mode) {
+char* person_to_string(const Person* person, FileFormat mode) {
   const char* TEXT_STRING = "First name: %s \t Last name: %s \t Age: %d";
   const char* CSV_STRING = "%s,%s,%d";
   const char* SELECTED_MODE_TEXT;
   switch (mode) {
-    case TEXT:
+    case TXT:
       SELECTED_MODE_TEXT = TEXT_STRING;
       break;
     case CSV:
@@ -93,14 +94,14 @@ char* person_to_string(const Person* person, PrintMode mode) {
   return string;
 }
 
-Person* parse_person_from_string(const char* string, PrintMode mode) {
+Person* parse_person_from_string(const char* string, FileFormat mode) {
   Person* person = malloc(sizeof(Person));
   if (person == NULL) {
     fprintf(stderr, "Failed to allocate memory for a new person.\n");
     return NULL;
   }
   switch (mode) {
-    case TEXT:
+    case TXT:
       sscanf(string, "First name: %[^\t] Last name: %[^\t] Age: %d",
              person->firstName, person->lastName, &person->age);
       break;

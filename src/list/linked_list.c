@@ -1,6 +1,8 @@
 
 #include "linked_list.h"
 
+#define _GNU_SOURCE
+#include <file-printing.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -240,4 +242,82 @@ void sort(LinkedList* list,
           int (*ComparisonFunction)(const void*, const void*)) {
   quick_sort(list, list->size, sizeof(Node), getNodeAtIndexGeneric,
              ComparisonFunction, swapNodes);
+}
+
+void save_list_to_file(LinkedList* list, const char* filename,
+                       FileFormat format,
+                       char* nodeDataToString(const void*, FileFormat)) {
+  FILE* file = fopen(filename, "w");
+  if (!file) {
+    fprintf(stderr, "Failed to open file %s\n", filename);
+    return;
+  }
+  for (size_t i = 0; i < list->size; i++) {
+    fprintf(file, "%s",
+            nodeDataToString(getNodeAtIndex(list, i)->data, format));
+    if (i < list->size - 1) {
+      fprintf(file, format == CSV ? "," : "\n");
+    }
+  }
+  fclose(file);
+}
+
+void load_list_from_file(LinkedList* list, const char* filename,
+                         FileFormat format,
+                         void* parseNodeData(const char*, FileFormat),
+                         int (*ComparisonFunction)(const void*, const void*),
+                         int nodeDataAttributesCount) {
+  FILE* file = fopen(filename, "r");
+  if (!file) {
+    fprintf(stderr, "Failed to open file %s\n", filename);
+    return;
+  }
+
+  char buffer[1024];
+  char* tokens[nodeDataAttributesCount];
+
+  while (fgets(buffer, sizeof(buffer), file) != NULL) {
+    char* line = strdup(buffer);
+    switch (format) {
+      case CSV: {
+        int tokenCount = 0;
+        char* token = strtok(line, ",");
+        while (token != NULL && tokenCount < nodeDataAttributesCount) {
+          tokens[tokenCount] = token;
+          fprintf(stderr, "Token %d: %s\n", tokenCount,
+                  token);  // Debugging output
+          token = strtok(NULL, ",");
+          tokenCount++;
+        }
+        if (tokenCount == nodeDataAttributesCount) {
+          char* csvLine = strdup(tokens[0]);
+          for (int j = 1; j < nodeDataAttributesCount; j++) {
+            strcat(csvLine, ",");
+            strcat(csvLine, tokens[j]);
+          }
+          void* data = parseNodeData(csvLine, CSV);
+          free(csvLine);
+          if (data != NULL) {  // Check if data parsed correctly
+            Node* node = create_node(data);
+            insertAtEnd(list, node->data, false, ComparisonFunction);
+          } else {
+            fprintf(stderr, "Failed to parse data into a valid structure.\n");
+          }
+        } else {
+          fprintf(stderr, "Expected %d tokens, but got %d.\n",
+                  nodeDataAttributesCount, tokenCount);
+        }
+      } break;
+      case TXT:
+        void* data = parseNodeData(line, TXT);
+        Node* node = create_node(data);
+        insertAtEnd(list, node->data, false, ComparisonFunction);
+        break;
+      default:
+        fprintf(stderr, "Invalid file format.");
+        break;
+    }
+    free(line);  // Free the duplicated line
+  }
+  fclose(file);
 }

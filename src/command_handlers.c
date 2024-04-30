@@ -76,7 +76,7 @@ bool execute_show_command(void* personToShow) {
   }
   for (size_t i = 0; i < globalPersonList->size; i++) {
     Person* currentPerson = (Person*)getNodeAtIndex(globalPersonList, i)->data;
-    printf("%i \t %s \n", i, person_to_string(currentPerson, TEXT));
+    printf("%i \t %s \n", i, person_to_string(currentPerson, TXT));
   }
   return true;
 }
@@ -92,4 +92,17 @@ bool execute_clear_command(void* personToClear) {
 bool execute_end_command(void* personToEnd) {
   printf("Thanks for using the program!");
   exit(0);
+}
+
+bool execute_store_command(void* null) {
+  initialiseList();
+  const char* FILE_NAME = "C:/Users/stnsl/OneDrive/Desktop/person_list.csv";
+  save_list_to_file(globalPersonList, FILE_NAME, CSV, person_to_string);
+}
+
+bool execute_load_command(void) {
+  initialiseList();
+  const char* FILE_NAME = "C:/Users/stnsl/OneDrive/Desktop/person_list.csv";
+  load_list_from_file(globalPersonList, FILE_NAME, CSV,
+                      parse_person_from_string, person_compare, 3);
 }
