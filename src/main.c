@@ -44,8 +44,6 @@ const size_t commandCount = sizeof(commandList) / sizeof(Command);
  * expression syntax error.
  */
 int main(int argc, char* argv[]) {
-  // BEGIN-STUDENTS-TO-ADD-CODE
-
   printf(
       "Welcome. This program allows you to manipulate a record of people.\n\n");
   while (true) {
@@ -53,17 +51,5 @@ int main(int argc, char* argv[]) {
                     commandList, commandCount, (void*)prompt_user_for_person);
     printf("\n\n");
   }
-
-  // LinkedList* list = create_linked_list();
-  // FileFormat printMode = CSV;
-  // Person* person = create_person("John", "Doe", 20);
-  // char* string = person_to_string(person, printMode);
-  // printf(string);
-  // printf("\n");
-  // Person* john = parse_person_from_string(string, printMode);
-  // // insertAtEnd(list, john, false, person_compare);
-  // printf(person_to_string(john, printMode));
-
-  // END-STUDENTS-TO-ADD-CODE
   return EXIT_SUCCESS;
 }
